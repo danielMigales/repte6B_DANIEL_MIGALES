@@ -1,0 +1,83 @@
+input,
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	margin: auto;
+	height: 100%;
+	font-size: 20px;
+}
+
+img {
+	max-width: 100px;
+	vertical-align: top;
+}
+
+main {
+	border: 1px solid red;
+	width: 900px;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+#caja {
+	width: 100%;
+	height: 81px;
+	border-bottom: 9px solid crimson;
+	padding: 20px 0px 5px 0px;
+	background-color: black;
+	box-sizing: border-box;
+	color: white;
+}
+
+#caixa_imatges {
+	display: flex;
+	padding-top: 15px;
+	padding-left: 10px;
+}
+
+.boton {
+	background-color: black;
+	border: 1px solid white;
+	color: white;
+	outline: none;
+	padding: 7px 15px 6px;
+	border-radius: 3px;
+	font-size: 0.75em;
+	cursor: pointer;
+	box-shadow: 0 0 5px white inset;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.boton:hover {
+	background-color: white;
+	color: black;
+	box-shadow: 0 0 0px black inset;
+}
+
+.botones {
+	text-align: center;
+}
+
+.rei {
+	width: 120px;
+	text-align: center;
+	margin-right: 6px;
+}
+
+.nom_rei {
+	margin-top: 8px;
+	text-align: center;
+	font-size: 0.9em;
+}
+
+.regnat {
+	text-align: center;
+	font-size: 0.7em;
+}
