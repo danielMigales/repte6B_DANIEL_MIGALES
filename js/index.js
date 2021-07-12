@@ -10,15 +10,13 @@ var final = [415, 451, 567, 586, 621, 672, 687];
 window.onload = inici;
 
 function inici() {
-    //botons
     document.querySelector("#boton0").onclick = botoInici; //punt 4
     document.querySelector("#boton1").onclick = ordreInvers; //punt 5
     document.querySelector("#boton2").onclick = regnatTolosa; //punt 6
     document.querySelector("#boton3").onclick = regnatArria; //punt 7
     document.querySelector("#boton4").onclick = regnatCatolic; //punt 8
     document.querySelector("#boton5").onclick = regnatSuperior; //punt 9
-    //crida a la funcio que carrega el array inicial amb imatges, noms i datas
-    carregarImatgesInici();
+    carregarImatgesInici(); //punt 3
 }
 
 /*punt 3. Inicialment el <DIV> anomenat “caixa_imatges” està buit, però en iniciar la pàgina i de manera automàtica 
@@ -30,14 +28,17 @@ de cada rei a sota de la imatge (com passarà als punts posteriors).*/
 function carregarImatgesInici() {
     for (let rei of reis) {
         document.getElementById("caixa_imatges").innerHTML +=
-            `<div class="rei"><img src="img/${rei}.png"><div class='nom_rei'>${rei}</div><div class="regnat"></div></div>`
+            `<div class="rei">
+                <img src="img/${rei}.png">
+                <div class='nom_rei'>${rei}</div>
+                <div class="regnat">()</div>`;
     }
 }
 
 //punt 4. En fer clic al primer <BUTTON> “inici” executa les mateixes accions que es realitzen al punt anterior.
 
 function botoInici() {
-    document.getElementById("caixa_imatges").innerHTML = ""; //primer el buido, perque sino mostra les imatges del inici i aquestes
+    buidarDiv(); //buido el div perque no s'afegeixin mes dades
     carregarImatgesInici();
 }
 
@@ -46,38 +47,87 @@ function botoInici() {
 En aquest punt s’haurà d’utilitzar FOR.*/
 
 function ordreInvers() {
-
-    document.getElementById("caixa_imatges").innerHTML = "";
-
-    for (let i = 0; i >= reis.length; i++) {
+    buidarDiv(); //s'elimina tot el contingut
+    //recorro l'array inversament
+    for (let i = reis.length - 1; i >= 0; i--) {
         document.getElementById("caixa_imatges").innerHTML +=
-            `<div class="rei"><img src="img/${reis}.png"><div class='nom_rei'>${reis}</div><div class="regnat"></div></div>`
+            `<div class="rei">
+                <img src="img/${reis[i]}.png">
+                <div class='nom_rei'>${reis[i]}</div>
+                <div class="regnat">()</div>
+            </div>`;
     }
 }
 
 /*punt 6. En fer clic al tercer <BUTTON> “Regnet Tolosà” s’eliminarà tot el contingut i es mostrarà la imatge (i a sota el nom i regnat) 
 dels dos primers valors (reis) de l’array utilitzant FOREACH.*/
-function regnatTolosa() {
 
+function regnatTolosa() {
+    buidarDiv(); //s'elimina contingut del div
+    reis.forEach(reisTolosans);
+    function reisTolosans(valor, posicio, valors) {
+        //per mostrar nomes els dos primers valors poso un if
+        if (posicio <= 1) {
+            document.getElementById("caixa_imatges").innerHTML +=
+                `<div class="rei">
+                    <img src="img/${valor}.png">
+                    <div class='nom_rei'>${valor}</div>
+                    <div class="regnat">()</div>
+                </div>`;
+        }
+    }
 }
 
 /* punt 7. En fer clic al quart <BUTTON> “Regnat Arrià” s’eliminarà tot el contingut i es mostrarà la imatge (i a sota el nom) dels reis 
 que van des del tercer valor fins al quart, és a dir els valors [2] i [3]. En aquest punt s’ha d’utilitzar FOR.
 Bonus track: Per pujar nota intenta tenir el mateix resultant utilitzant WHILE.*/
-function regnatArria() {
 
+function regnatArria() {
+    buidarDiv(); //s'elimina contingut del div
+    for (let i = 0; i < reis.length; i++) {
+        //per mostrar nomes els valors segon i tercer poso un if
+        if (i == 2 || i == 3) {
+            document.getElementById("caixa_imatges").innerHTML +=
+                `<div class="rei">
+                <img src="img/${reis[i]}.png">
+                <div class='nom_rei'>${reis[i]}</div>
+                <div class="regnat">()</div>  
+            </div>`;
+        }
+    }
 }
 
 /*punt 8. En fer clic al cinquè <BUTTON> “Regnat Catòlic” s’eliminarà tot el contingut i es mostrarà la image (i a sota el nom i regnat) del últims 
 3 valors de l’array. En aquest punt s’ha d’utilitzar FOREACH.
 Bonus track: Per pujar nota intenta tenir el mateix resultant utilitzant DO WHILE.*/
-function regnatCatolic() {
 
+function regnatCatolic() {
+    buidarDiv(); //s'elimina contingut del div
+    reis.forEach(ultimsReis);
+    function ultimsReis(valor, posicio, valors) {
+        if (posicio >= reis.length - 3) {
+            document.getElementById("caixa_imatges").innerHTML +=
+                `<div class="rei">
+                <img src="img/${valor}.png">
+                <div class='nom_rei'>${valor}</div>
+                <div class="regnat">()</div>  
+            </div>`;
+        }
+    }
 }
 
 /* punt 9. En fer clic al sisè <BUTTON> “Més de 10 anys” s’eliminarà tot el contingut i es mostrarà la imatge (i a sota el nom i regnat) dels reis 
 que han tingut un regnat superior als 10 anys. En aquest cas s’han d’utilitzar els valors dels arrays principi i final per conèixer els anys de
 regnat de cada rei i MAP per recórrer els valors de l’array.*/
+
 function regnatSuperior() {
 
+    buidarDiv(); //s'elimina contingut del div
+
+
+
+}
+
+function buidarDiv() {
+    document.getElementById("caixa_imatges").innerHTML = "";
 }
