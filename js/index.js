@@ -27,7 +27,7 @@ Amb bonus track (per pujar nota): Es mostren les imatges amb el nom i la dates d
 de cada rei a sota de la imatge (com passarà als punts posteriors).*/
 
 function carregarImatgesInici() {
-    colorsBotons(0);//crida a la funcio que posa color al boto
+    colorsBotons(0); //crida a la funcio que posa color al boto
     var contador = -1;
     for (let rei of reis) {
         contador++;
@@ -43,7 +43,7 @@ function carregarImatgesInici() {
 //punt 4. En fer clic al primer <BUTTON> “inici” executa les mateixes accions que es realitzen al punt anterior.
 
 function botoInici() {
-    colorsBotons(0);//crida a la funcio que posa color al boto
+    colorsBotons(0); //crida a la funcio que posa color al boto
     buidarDiv(); //buido el div perque no s'afegeixin mes dades
     carregarImatgesInici(); //crida al metode inicial
 }
@@ -53,7 +53,7 @@ function botoInici() {
 En aquest punt s’haurà d’utilitzar FOR.*/
 
 function ordreInvers() {
-    colorsBotons(1);//crida a la funcio que posa color al boto
+    colorsBotons(1); //crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina tot el contingut
     //recorro l'array inversament
     for (let i = reis.length - 1; i >= 0; i--) {
@@ -70,7 +70,7 @@ function ordreInvers() {
 dels dos primers valors (reis) de l’array utilitzant FOREACH.*/
 
 function regnatTolosa() {
-    colorsBotons(2);//crida a la funcio que posa color al boto
+    colorsBotons(2); //crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //forEach que mostra els dos primers valors
     reis.forEach(reisTolosans);
@@ -91,7 +91,7 @@ function regnatTolosa() {
 que van des del tercer valor fins al quart, és a dir els valors [2] i [3]. En aquest punt s’ha d’utilitzar FOR.*/
 
 function regnatArria() {
-    colorsBotons(3);//crida a la funcio que posa color al boto
+    colorsBotons(3); //crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //bucle for mostrant segon i tercer valor de l'array reis
     for (let i = 0; i < reis.length; i++) {
@@ -108,11 +108,18 @@ function regnatArria() {
 
     /*Bonus track: Per pujar nota intenta tenir el mateix resultant utilitzant WHILE.*/
 
-    // var contador = 2;
-    // while (contador == 2 || contador == 3) {
+    // var contador = -1;
+    // while (contador <= reis.length) {
     //     contador++;
-    //     let estructuraDiv = `<div class="rei"><img src="img/${reis[contador]}.png"><div class='nom_rei'>${reis[contador]}</div><div class="regnat">(${principi[contador]}-${final[contador]})</div></div>`;
-    //     document.getElementById("caixa_imatges").innerHTML += estructuraDiv;
+    //     if (contador == 2 || contador == 3) {
+    //         let estructuraDiv =
+    //             `<div class="rei">
+    //     <img src="img/${reis[contador]}.png">
+    //     <div class='nom_rei'>${reis[contador].substr(0, 1).toUpperCase() + reis[contador].substr(1).toLowerCase()}</div>
+    //     <div class="regnat">(${principi[contador]}-${final[contador]})</div>
+    //     </div>`;
+    //         document.getElementById("caixa_imatges").innerHTML += estructuraDiv;
+    //     }
     // }
 }
 
@@ -120,7 +127,7 @@ function regnatArria() {
 3 valors de l’array. En aquest punt s’ha d’utilitzar FOREACH.*/
 
 function regnatCatolic() {
-    colorsBotons(4);//crida a la funcio que posa color al boto
+    colorsBotons(4); //crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //forEach ultims 3 valors de l'array
     reis.forEach(ultimsReis);
@@ -136,17 +143,19 @@ function regnatCatolic() {
     }
 
     /*Bonus track: Per pujar nota intenta tenir el mateix resultant utilitzant DO WHILE.*/
-    //AQUEST BUCLE NO FUNCIONA ENCARA
-    // var contador = -1;  
+
+    // var contador = 0;
     // do {
     //     contador++;
-    //     document.getElementById("caixa_imatges").innerHTML +=
-    //         `<div class="rei">
+    //     if (contador >= reis.length - 3) {
+    //         document.getElementById("caixa_imatges").innerHTML +=
+    //             `<div class="rei">
     //             <img src="img/${reis[contador]}.png">
-    //             <div class='nom_rei'>${reis[contador]}</div>
+    //             <div class='nom_rei'>${reis[contador].substr(0, 1).toUpperCase() + reis[contador].substr(1).toLowerCase()}</div>
     //            <div class="regnat">(${principi[contador]}-${final[contador]})</div>  
     //          </div>`;
-    // } while ();
+    //     }
+    // } while (contador != reis.length - 1);
 }
 
 /* punt 9. En fer clic al sisè <BUTTON> “Més de 10 anys” s’eliminarà tot el contingut i es mostrarà la imatge (i a sota el nom i regnat) dels reis 
@@ -154,7 +163,7 @@ que han tingut un regnat superior als 10 anys. En aquest cas s’han d’utilitz
 regnat de cada rei i MAP per recórrer els valors de l’array.*/
 
 function regnatSuperior() {
-    colorsBotons(5);//crida a la funcio que posa color al boto
+    colorsBotons(5); //crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //bucle map mostrant regnats de mes de 10 anys
     arrayRegnatSuperior = reis.map(calcular);
@@ -187,7 +196,6 @@ no s’han de fer (encara que si algú vol pistes per poder-ho fer que m’ho di
 explicaré).*/
 
 //funcio per pintar els botons cada vegada que es faci click
-
 function colorsBotons(boton) {
     //primer es comptem quants botons hi ha
     let totalBotons = document.querySelectorAll(".boton").length;
@@ -201,5 +209,4 @@ function colorsBotons(boton) {
     }
 
     //La funcio per possar la primera lletra en majusculas,finalment no l'ha he fet a dins d'una funcio, sino que encara que sigui escriure i repetir molt mes codi l'he possat a la mateixa linea
-
 }
