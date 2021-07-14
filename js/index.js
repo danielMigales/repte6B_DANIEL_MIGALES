@@ -10,7 +10,6 @@ var final = [415, 451, 567, 586, 621, 672, 687];
 window.onload = inici;
 
 function inici() {
-
     document.querySelector("#boton0").onclick = botoInici; //punt 4
     document.querySelector("#boton1").onclick = ordreInvers; //punt 5
     document.querySelector("#boton2").onclick = regnatTolosa; //punt 6
@@ -28,14 +27,14 @@ Amb bonus track (per pujar nota): Es mostren les imatges amb el nom i la dates d
 de cada rei a sota de la imatge (com passarà als punts posteriors).*/
 
 function carregarImatgesInici() {
-
+    colorsBotons(0);//crida a la funcio que posa color al boto
     var contador = -1;
     for (let rei of reis) {
         contador++;
         document.getElementById("caixa_imatges").innerHTML +=
             `<div class="rei">
                 <img src="img/${rei}.png">
-                <div class='nom_rei'>${rei}</div>   
+                <div class='nom_rei'>${rei.substr(0, 1).toUpperCase() + rei.substr(1).toLowerCase()}</div> 
                 <div class="regnat">(${principi[contador]}-${final[contador]})</div>  
             </div>`;
     }
@@ -44,7 +43,7 @@ function carregarImatgesInici() {
 //punt 4. En fer clic al primer <BUTTON> “inici” executa les mateixes accions que es realitzen al punt anterior.
 
 function botoInici() {
-
+    colorsBotons(0);//crida a la funcio que posa color al boto
     buidarDiv(); //buido el div perque no s'afegeixin mes dades
     carregarImatgesInici(); //crida al metode inicial
 }
@@ -54,15 +53,14 @@ function botoInici() {
 En aquest punt s’haurà d’utilitzar FOR.*/
 
 function ordreInvers() {
-
+    colorsBotons(1);//crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina tot el contingut
-
     //recorro l'array inversament
     for (let i = reis.length - 1; i >= 0; i--) {
         document.getElementById("caixa_imatges").innerHTML +=
             `<div class="rei">
                 <img src="img/${reis[i]}.png">
-                <div class='nom_rei'>${reis[i]}</div>
+                <div class='nom_rei'>${reis[i].substr(0, 1).toUpperCase() + reis[i].substr(1).toLowerCase()}</div>
                 <div class="regnat">(${principi[i]} - ${final[i]})</div>
             </div>`;
     }
@@ -72,9 +70,9 @@ function ordreInvers() {
 dels dos primers valors (reis) de l’array utilitzant FOREACH.*/
 
 function regnatTolosa() {
-
+    colorsBotons(2);//crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
-
+    //forEach que mostra els dos primers valors
     reis.forEach(reisTolosans);
     function reisTolosans(valor, posicio, valors) {
         //per mostrar nomes els dos primers valors poso un if
@@ -82,7 +80,7 @@ function regnatTolosa() {
             document.getElementById("caixa_imatges").innerHTML +=
                 `<div class="rei">
                     <img src="img/${valor}.png">
-                    <div class='nom_rei'>${valor}</div>
+                    <div class='nom_rei'>${valor.substr(0, 1).toUpperCase() + valor.substr(1).toLowerCase()}</div>
                     <div class="regnat">(${principi[posicio]} - ${final[posicio]})</div>
                 </div>`;
         }
@@ -93,16 +91,16 @@ function regnatTolosa() {
 que van des del tercer valor fins al quart, és a dir els valors [2] i [3]. En aquest punt s’ha d’utilitzar FOR.*/
 
 function regnatArria() {
-
+    colorsBotons(3);//crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
-
+    //bucle for mostrant segon i tercer valor de l'array reis
     for (let i = 0; i < reis.length; i++) {
         //per mostrar nomes els valors : segon i tercer de l'array poso un if
         if (i == 2 || i == 3) {
             document.getElementById("caixa_imatges").innerHTML +=
                 `<div class="rei">
                 <img src="img/${reis[i]}.png">
-                <div class='nom_rei'>${reis[i]}</div>
+                <div class='nom_rei'>${reis[i].substr(0, 1).toUpperCase() + reis[i].substr(1).toLowerCase()}</div>
                 <div class="regnat">(${principi[i]}-${final[i]})</div>  
             </div>`;
         }
@@ -122,7 +120,7 @@ function regnatArria() {
 3 valors de l’array. En aquest punt s’ha d’utilitzar FOREACH.*/
 
 function regnatCatolic() {
-
+    colorsBotons(4);//crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //forEach ultims 3 valors de l'array
     reis.forEach(ultimsReis);
@@ -131,14 +129,14 @@ function regnatCatolic() {
             document.getElementById("caixa_imatges").innerHTML +=
                 `<div class="rei">
                 <img src="img/${valor}.png">
-                <div class='nom_rei'>${valor}</div>
+                <div class='nom_rei'>${valor.substr(0, 1).toUpperCase() + valor.substr(1).toLowerCase()}</div>
                <div class="regnat">(${principi[posicio]}-${final[posicio]})</div>  
              </div>`;
         }
     }
 
     /*Bonus track: Per pujar nota intenta tenir el mateix resultant utilitzant DO WHILE.*/
-
+    //AQUEST BUCLE NO FUNCIONA ENCARA
     // var contador = -1;  
     // do {
     //     contador++;
@@ -156,18 +154,20 @@ que han tingut un regnat superior als 10 anys. En aquest cas s’han d’utilitz
 regnat de cada rei i MAP per recórrer els valors de l’array.*/
 
 function regnatSuperior() {
-
-
-
+    colorsBotons(5);//crida a la funcio que posa color al boto
     buidarDiv(); //s'elimina contingut del div
     //bucle map mostrant regnats de mes de 10 anys
-    var regnatSuperior = reis.map(calcular);
+    arrayRegnatSuperior = reis.map(calcular);
     function calcular(valor, posicio, valors) {
-
         let anys = Math.abs(principi[posicio] - final[posicio]); //aplico el math perque possi el numero en positiu
         //si anys es mayor de 10 imprimeix els div
         if (anys > 10) {
-            let caixa_imatges = `<div class="rei"><img src="img/${valor}.png"><div class='nom_rei'>${valor}</div><div class="regnat">(${principi[posicio]}-${final[posicio]})</div></div>`;
+            let caixa_imatges =
+                `<div class="rei">
+                <img src="img/${valor}.png">
+                <div class='nom_rei'>${valor.substr(0, 1).toUpperCase() + valor.substr(1).toLowerCase()}</div>
+                <div class="regnat">(${principi[posicio]}-${final[posicio]})</div>
+            </div>`;
             document.getElementById("caixa_imatges").innerHTML += caixa_imatges;
         }
         return caixa_imatges;
@@ -175,6 +175,31 @@ function regnatSuperior() {
 }
 
 //funcio per netejar el div caixa_imatges
+
 function buidarDiv() {
     document.getElementById("caixa_imatges").innerHTML = "";
+}
+
+/*Nota:
+Funcionalitats de l’exemple, com la primera lletra del nom del rei en majúscules (sense afegir
+un altre array) o que al fer en clic en un botó aquest es quedi d’un color diferent a la resta,
+no s’han de fer (encara que si algú vol pistes per poder-ho fer que m’ho digui pel foro i ho
+explicaré).*/
+
+//funcio per pintar els botons cada vegada que es faci click
+
+function colorsBotons(boton) {
+    //primer es comptem quants botons hi ha
+    let totalBotons = document.querySelectorAll(".boton").length;
+    //amb un bucle es recorren tots borrant el format i quan troba el que l'hi passo com parametre el pinta
+    for (let i = 0; i < totalBotons; i++) {
+        document.querySelectorAll(".boton")[i].style = null;
+        if (i == boton) {
+            document.querySelectorAll(".boton")[boton].style.backgroundColor = "white";
+            document.querySelectorAll(".boton")[boton].style.color = "black";
+        }
+    }
+
+    //La funcio per possar la primera lletra en majusculas,finalment no l'ha he fet a dins d'una funcio, sino que encara que sigui escriure i repetir molt mes codi l'he possat a la mateixa linea
+
 }
